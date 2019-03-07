@@ -2,7 +2,7 @@ import { getInitialData } from '../utils/api';
 
 import { receiveTweets } from './tweets';
 import { receiveUsers } from './users';
-import { setAUthedUser } from './authedUser';
+import { setAuthedUser } from './authedUser';
 
 const AUTHED_ID = "dan_abramov";
 
@@ -12,7 +12,7 @@ export function handleInitialData() {
             .then(({users, tweets})=> {
                 dispatch(receiveTweets(tweets));
                 dispatch(receiveUsers(users));
-                dispatch(setAUthedUser(AUTHED_ID));
+                dispatch(setAuthedUser(AUTHED_ID));
             });
     }
 }
