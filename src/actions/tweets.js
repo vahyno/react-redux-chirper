@@ -1,4 +1,7 @@
+import { saveLikeToggle } from '../utils/api';
+
 export const RECEIVE_TWEETS = 'RECEIVE_TWEETS';
+export const TOGGLE_TWEET = 'TOGGLE_TWEET';
 
 
 export function receiveTweets (tweets) {
@@ -8,3 +11,23 @@ export function receiveTweets (tweets) {
     }
 }
 
+export function toggleTweet ({ id, hasLiked, authedUser }) {
+    return {
+        type: TOGGLE_TWEET,
+        id,
+        hasLiked,
+        authedUser,
+    }
+}
+
+export function handleToggleTweet (info) {
+    return (dispatch) => {
+        dispatch(toggleTweet(info));
+        return saveLikeToggle(info)
+            .catch( (e) => {
+                console.warn('Error in handleToggleTweet', e);
+                dispatch(toggleTweet(info));
+                alert('There was an error in liking Tweet. Please try again.');
+            })
+    }
+}

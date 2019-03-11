@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleToggleTweet } from '../actions/tweets';
 import { formatTweet, formatDate } from '../utils/helpers';
 import { 
     TiArrowBackOutline, 
     TiHeartOutline, 
-    TiHeartFullOutline, 
-    TiArrowDownOutline} from 'react-icons/ti/index';
+    TiHeartFullOutline
+} from 'react-icons/ti/index';
 
 class Tweet extends Component {
 
     toParent = (e, id) => {
         e.preventDefault();
-
         //TODO: redirect to parent tweet;
     }
 
     handleLike = (e) => {
         e.preventDefault();
-        
+        const {tweet, dispatch, authedUser } = this.props;
         //TODO: handle like Tweet.
+        dispatch(handleToggleTweet({
+            id: tweet.id,
+            hasLiked: tweet.hasLiked,
+            authedUser,
+        }));
+        
     }
 
     render(){
@@ -30,7 +36,6 @@ class Tweet extends Component {
         console.log('TWEEEEET: ',this.props)
 
         const {avatar, hasLiked, id, likes, name, parent, replies, text, timestamp} = tweet;
-
         return (
             <div className='tweet'>
                 <img 
