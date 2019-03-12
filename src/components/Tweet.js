@@ -33,7 +33,7 @@ class Tweet extends Component {
         if ( tweet === null) {
             return <p>This Tweet does not exists.</p>
         }
-        console.log('TWEEEEET: ',this.props)
+        // console.log('TWEEEEET: ',this.props)
 
         const {avatar, hasLiked, id, likes, name, parent, replies, text, timestamp} = tweet;
         return (
