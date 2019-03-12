@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { handleAddTweet } from '../actions/tweets'
+ 
 class NewTweet extends Component {
     state = {
         text: '',
@@ -18,7 +19,8 @@ class NewTweet extends Component {
         const { text } = this.state;
         const { dispatch, id } = this.props;
 
-        // import handleAddTweet
+        // console.log('NEW TWEET', text);
+        dispatch(handleAddTweet(text, id));
 
         this.setState(()=>({
             text: '',
@@ -34,7 +36,7 @@ class NewTweet extends Component {
         return (
             <div>
                 <h3 className='center'>Compose new Tweet</h3>
-                <form className='new-tweet' onSubmit={(e)=> this.handleSubmit}>
+                <form className='new-tweet' onSubmit={this.handleSubmit}>
                     <textarea 
                         className='textarea'
                         maxLength={280}
